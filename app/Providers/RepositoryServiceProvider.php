@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Repository\BlockRepository;
-use App\Repository\BlockRepositoryInterface;
-use App\Repository\BookingRepository;
-use App\Repository\BookingRepositoryInterface;
-use App\Repository\RoomRepository;
-use App\Repository\RoomRepositoryInterface;
+use App\Repositories\BlockRepository;
+use App\Repositories\BlockRepositoryInterface;
+use App\Repositories\BookingRepository;
+use App\Repositories\BookingRepositoryInterface;
+use App\Repositories\RoomRepository;
+use App\Repositories\RoomRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

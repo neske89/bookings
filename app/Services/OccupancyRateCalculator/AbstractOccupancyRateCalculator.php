@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\OccupancyCalculator;
+namespace App\Services\OccupancyCalculator;
 
 abstract class AbstractOccupancyRateCalculator implements OccupancyRateCalculatorInterface
 {

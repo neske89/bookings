@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Service\RoomCapacityRetriever;
+use App\Services\RoomCapacityRetriever;
 use Carbon\Carbon;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;

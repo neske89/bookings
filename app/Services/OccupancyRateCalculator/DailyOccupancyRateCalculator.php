@@ -1,5 +1,5 @@
 <?php
-namespace App\Service\OccupancyCalculator;
+namespace App\Services\OccupancyCalculator;
 
 use App\Service\RoomCapacityRetriever;
 use Carbon\Carbon;

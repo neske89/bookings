@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
-use App\Repository\RoomRepositoryInterface;
+use App\Repositories\RoomRepositoryInterface;
 use Carbon\Carbon;
 
 class RoomCapacityRetriever
