@@ -5,5 +5,5 @@ use Carbon\Carbon;
 
 interface OccupancyRateCalculatorInterface
 {
-    public function calculate(Carbon $dateTime, array $roomIds= []):float;
+    public function calculate(Carbon $referenceDateTime, array $roomIds= []):float;
 }

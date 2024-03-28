@@ -22,7 +22,7 @@ class RoomCapacityRetriever
     }
 
     public function getMonthlyCapacity(Carbon $referenceDate, array $roomIds):int {
-        return $this->roomRepository->getTotalCapacity($roomIds) * $referenceDate->daysInMonth;
+        return $this->getDailyCapacity($roomIds) * $referenceDate->daysInMonth;
     }
 
 }
