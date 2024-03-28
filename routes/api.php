@@ -12,3 +12,4 @@ Route::get('/monthly-occupancy-rates/{date}', [OccupancyRateController::class, '
     ->name('monthly-occupancy-rates');
 
 Route::post('/booking', [BookingController::class, 'store']);
+Route::put('/booking/{id}', [BookingController::class, 'update']);

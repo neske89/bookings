@@ -19,17 +19,18 @@ class BookingCRUDService
     /**
      * @throws RoomIsAlreadyFullyBookedException
      */
-    public function create(BookingDTO $bookingDTO): Booking
+    public function create(BookingDTO $bookingDTO): BookingDTO
     {
         $this->roomAvailabilityChecker->check($bookingDTO->roomId, $bookingDTO->startsAt, $bookingDTO->endsAt);
 
-        return $this->bookingRepository->create($bookingDTO->roomId, $bookingDTO->startsAt->startOfDay(), $bookingDTO->endsAt->endOfDay());
+        $booking = $this->bookingRepository->create($bookingDTO->roomId, $bookingDTO->startsAt->startOfDay(), $bookingDTO->endsAt->endOfDay());
+        return new BookingDTO($booking->getRoomId(), $booking->getStartsAt(), $booking->getEndsAt(),$booking->getId());
     }
 
     /**
      * @throws RoomIsAlreadyFullyBookedException
      */
-    public function update(Booking $booking, BookingDTO $bookingDTO): Booking
+    public function update(Booking $booking, BookingDTO $bookingDTO): BookingDTO
     {
         $this->roomAvailabilityChecker->check(
             $bookingDTO->roomId,
@@ -37,10 +38,11 @@ class BookingCRUDService
             $bookingDTO->endsAt,
             [$booking->id]
         );
+
         $booking->setRoomId($bookingDTO->roomId);
         $booking->setStartsAt($bookingDTO->startsAt->startOfDay());
         $booking->setEndsAt($bookingDTO->endsAt->endOfDay());
-        return $this->bookingRepository->save($booking);
-
+        $this->bookingRepository->save($booking);
+        return new BookingDTO($booking->getRoomId(), $booking->getStartsAt(), $booking->getEndsAt(),$booking->getId());
     }
 }

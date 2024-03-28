@@ -12,7 +12,7 @@ use Tests\TestCase;
 class MonthlyOccupancyRatesTest extends TestCase
 {
     use RefreshDatabase;
-    private CONST URI = '/api/monthly-occupancy-rates';
+    public CONST URI = '/api/monthly-occupancy-rates';
     //generate set up method
     protected function setUp(): void
     {

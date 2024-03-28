@@ -44,7 +44,7 @@ class BookingCRUDServiceTest extends TestCase
             $this->assertDatabaseHas('bookings', [
                 'room_id' => $bookingDTO->roomId,
                 'starts_at' => $bookingDTO->startsAt,
-                'ends_at' => $bookingDTO->endsAt,
+                'ends_at' => $bookingDTO->endsAt->endOfDay(),
             ]);
         }
     }
@@ -96,9 +96,9 @@ class BookingCRUDServiceTest extends TestCase
         $this->bookingService->update($booking,$bookingDTO);
 
         if (!$exceptionClass) {
-            $this->assertEquals($bookingDTO->roomId, $booking->room_id);
-            $this->assertEquals($bookingDTO->startsAt, $booking->starts_at);
-            $this->assertEquals($bookingDTO->endsAt, $booking->ends_at);
+            $this->assertEquals($bookingDTO->roomId, $booking->getRoomId());
+            $this->assertEquals($bookingDTO->startsAt->startOfDay()->getTimestamp(), $booking->getStartsAt()->getTimestamp());
+            $this->assertEquals($bookingDTO->endsAt->endOfDay()->getTimestamp(), $booking->getEndsAt()->getTimestamp());
             $this->assertTrue($booking->isClean());
         }
     }
@@ -121,7 +121,7 @@ class BookingCRUDServiceTest extends TestCase
                 new BookingDTO(
                     RoomSeeder::ROOM_2_CAPACITY_ID,
                     CarbonImmutable::parse('2026-12-04 00:00:00'),
-                    CarbonImmutable::parse('2026-12-05 23:59:59'),
+                    CarbonImmutable::parse('2026-12-05 00:00:00'),
                 ),
                 null,
                 null

@@ -22,7 +22,7 @@ class MonthlyOccupancyRatesRequest extends FormRequest
     public function validationData():array
     {
         // Merge route parameters with the request's query parameters
-        return array_merge($this->route()->parameters(), $this->query());
+        return array_merge($this->route()?->parameters(), $this->query());
     }
 }
 

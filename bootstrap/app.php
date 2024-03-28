@@ -4,6 +4,7 @@ use App\Exception\RoomIsAlreadyFullyBookedException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (LogicException $e) {
             return response()->json(['message' => $e->getMessage()], 422);
         });
-        $exceptions->render(function (Exception $e) {
-            return response()->json(['message' => 'Internal Server Error'], 500);
+        $exceptions->render(function (NotFoundHttpException $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
         });
     })->create();

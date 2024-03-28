@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class DailyOccupancyRatesTest extends TestCase
 {
-    private CONST URI = '/api/daily-occupancy-rates';
+    public CONST URI = '/api/daily-occupancy-rates';
     use RefreshDatabase;
 
     //generate set up method
