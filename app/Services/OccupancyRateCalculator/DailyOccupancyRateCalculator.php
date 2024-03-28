@@ -6,7 +6,6 @@ use Carbon\Carbon;
 
 class DailyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
 {
-    //generate constructor
     public function __construct(
         private RoomCapacityRetriever $roomCapacityRetriever,
     ) {
