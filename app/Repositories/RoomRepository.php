@@ -15,4 +15,8 @@ class RoomRepository implements RoomRepositoryInterface
         }
         return $query->sum('capacity');
     }
+    public function findByIdOrFail(int $id): Room
+    {
+        return Room::findOrFail($id);
+    }
 }

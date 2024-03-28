@@ -39,7 +39,6 @@ class TotalDailyReservationsCounterTest extends TestCase
         $this->assertEquals($expectedBookings, $result);
     }
 
-    //expected are based on data in TotalMonthlyReservationsCounterSeeder
     public static function countBookingsDataProvider(): array
     {
         return [
