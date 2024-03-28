@@ -1,4 +1,5 @@
 <?php
+namespace App\Service\OccupancyCalculator;
 
 use App\Service\RoomCapacityRetriever;
 use Carbon\Carbon;
@@ -10,6 +11,7 @@ class DailyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
         private RoomCapacityRetriever $roomCapacityRetriever,
     ) {
     }
+
     public function calculate(Carbon $referenceDateTime, array $roomIds = []): float
     {
         $referenceDateTime->copy()->startOfDay();

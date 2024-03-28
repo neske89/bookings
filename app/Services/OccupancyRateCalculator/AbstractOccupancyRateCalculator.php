@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Service\OccupancyCalculator;
 
 abstract class AbstractOccupancyRateCalculator implements OccupancyRateCalculatorInterface
 {
@@ -16,6 +17,6 @@ abstract class AbstractOccupancyRateCalculator implements OccupancyRateCalculato
             return 0;
         }
 
-        return round($totalBookings / ($totalCapacity - $totalBlocks),2);
+        return round($totalBookings / ($totalCapacity - $totalBlocks), 2);
     }
 }
