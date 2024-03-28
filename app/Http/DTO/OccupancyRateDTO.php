@@ -2,13 +2,11 @@
 
 namespace App\Http\DTO;
 
-class OccupancyRateDTO implements \JsonSerializable
+readonly class OccupancyRateDTO implements \JsonSerializable
 {
-    public $occupancyRate;
 
-    public function __construct(float $occupancyRate)
+    public function __construct(public float $occupancyRate)
     {
-        $this->occupancyRate = $occupancyRate;
     }
 
     public function jsonSerialize(): mixed

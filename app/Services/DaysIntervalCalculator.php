@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
+
+
+use Carbon\CarbonImmutable;
 
 class DaysIntervalCalculator
 {
-    public function calculate(Carbon $startDateTime, Carbon $endDateTime): int
+    public function calculate(CarbonImmutable $startDateTime, CarbonImmutable $endDateTime): int
     {
         if ($startDateTime->gt($endDateTime)) {
             throw new \LogicException('Start date cannot be greater than end date');

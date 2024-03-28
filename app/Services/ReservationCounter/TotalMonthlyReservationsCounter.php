@@ -5,7 +5,8 @@ namespace App\Services\ReservationCounter;
 use App\Repositories\BlockRepositoryInterface;
 use App\Repositories\BookingRepositoryInterface;
 use App\Services\DaysIntervalCalculator;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+
 
 class TotalMonthlyReservationsCounter implements ReservationCounterInterface
 {
@@ -16,7 +17,7 @@ class TotalMonthlyReservationsCounter implements ReservationCounterInterface
     ) {
     }
 
-    public function countBookings(Carbon $referenceDateTime, array $roomIds = []): int
+    public function countBookings(CarbonImmutable $referenceDateTime, array $roomIds = []): int
     {
         $startOfMonth = $referenceDateTime->copy()->startOfMonth();
         $endOfMonth = $referenceDateTime->copy()->endOfMonth();
@@ -32,7 +33,7 @@ class TotalMonthlyReservationsCounter implements ReservationCounterInterface
         return $total;
     }
 
-    public function countBlocks(Carbon $referenceDateTime, array $roomIds = []): int
+    public function countBlocks(CarbonImmutable $referenceDateTime, array $roomIds = []): int
     {
         $startOfMonth = $referenceDateTime->copy()->startOfMonth();
         $endOfMonth = $referenceDateTime->copy()->endOfMonth();
@@ -47,16 +48,16 @@ class TotalMonthlyReservationsCounter implements ReservationCounterInterface
     /**
      * Calculates the number of days a specific booking reservation spans within a given month.
      */
-    private function countBookingDurationInDays(Carbon $forMonth, Carbon $startDate, Carbon $endDate): int
+    private function countBookingDurationInDays(CarbonImmutable $forMonth, CarbonImmutable $startDate, CarbonImmutable $endDate): int
     {
         // Check if startDate is before the beginning of forMonth
-        if ($startDate->lessThan($forMonth->copy()->startOfMonth())) {
-            $startDate = $forMonth->copy()->startOfMonth();
+        if ($startDate->lessThan($forMonth->startOfMonth())) {
+            $startDate = $forMonth->startOfMonth();
         }
 
         // Check if endDate is after the end of forMonth
         if ($endDate->greaterThan($forMonth->copy()->endOfMonth())) {
-            $endDate = $forMonth->copy()->endOfMonth();
+            $endDate = $forMonth->endOfMonth();
         }
 
         return $this->daysIntervalCalculator->calculate($startDate, $endDate);

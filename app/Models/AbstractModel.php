@@ -8,19 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class AbstractModel extends Model
 {
     use HasFactory;
-
+    protected $casts = [
+        'id' => 'integer',
+        'created_at' => 'immutable_datetime',
+        'updated_at' => 'immutable_datetime',
+    ];
     public function getId(): int
     {
         return $this->id;
-    }
-
-    public function getCreatedAt(): \Carbon\Carbon
-    {
-        return $this->created_at;
-    }
-
-    public function getUpdatedAt(): \Carbon\Carbon
-    {
-        return $this->updated_at;
     }
 }

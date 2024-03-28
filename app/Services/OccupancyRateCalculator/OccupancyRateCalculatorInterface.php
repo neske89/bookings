@@ -1,10 +1,9 @@
 <?php
 namespace App\Services\OccupancyRateCalculator;
 
-
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 interface OccupancyRateCalculatorInterface
 {
-    public function calculate(Carbon $referenceDateTime, array $roomIds= []):float;
+    public function calculate(CarbonImmutable $referenceDateTime, array $roomIds= []):float;
 }

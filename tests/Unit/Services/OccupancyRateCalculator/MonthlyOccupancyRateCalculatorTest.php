@@ -5,7 +5,8 @@ namespace Tests\Unit\OccupancyCalculator;
 use App\Services\OccupancyRateCalculator\MonthlyOccupancyRateCalculator;
 use App\Services\ReservationCounter\TotalMonthlyReservationsCounter;
 use App\Services\RoomCapacityRetriever;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use PHPUnit\Framework\TestCase;
 
 class MonthlyOccupancyRateCalculatorTest extends TestCase
@@ -43,7 +44,7 @@ class MonthlyOccupancyRateCalculatorTest extends TestCase
             ->method('countBlocks')
             ->willReturn($totalBlocks);
 
-        $result = $this->MonthlyOccupancyRateCalculator->calculate(new Carbon(), []);
+        $result = $this->MonthlyOccupancyRateCalculator->calculate(new CarbonImmutable(), []);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -65,7 +66,7 @@ class MonthlyOccupancyRateCalculatorTest extends TestCase
 
         $this->expectException(\LogicException::class);
 
-        $this->MonthlyOccupancyRateCalculator->calculate(new Carbon(), []);
+        $this->MonthlyOccupancyRateCalculator->calculate(new CarbonImmutable(), []);
     }
 
     public static function occupancyDataProvider(): array

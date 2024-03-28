@@ -3,7 +3,8 @@
 namespace Tests\Integration\Repository;
 
 use App\Repositories\BlockRepositoryInterface;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Database\Seeders\ReservationsSeeder;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,8 +33,8 @@ class BlockRepositoryTest extends TestCase
         array $roomIds,
         int $expectedResult
     ): void {
-        $startsAtCarbon = Carbon::parse($startsAt);
-        $endsAtCarbon = Carbon::parse($endsAt);
+        $startsAtCarbon = CarbonImmutable::parse($startsAt);
+        $endsAtCarbon = CarbonImmutable::parse($endsAt);
         $blocks = $this->blockRepository->getReservationsInPeriod($startsAtCarbon, $endsAtCarbon, $roomIds);
         $this->assertEquals($expectedResult, $blocks->count());
     }
@@ -61,7 +62,7 @@ class BlockRepositoryTest extends TestCase
      */
     public function testSumReservationsOnDate(string $referenceDate, array $roomIds, int $expectedResult): void
     {
-        $result = $this->blockRepository->sumReservationsOnDate(Carbon::parse($referenceDate), $roomIds);
+        $result = $this->blockRepository->sumReservationsOnDate(CarbonImmutable::parse($referenceDate), $roomIds);
         $this->assertEquals($expectedResult, $result);
     }
 

@@ -4,7 +4,7 @@ namespace App\Services\ReservationCounter;
 
 use App\Repositories\BlockRepositoryInterface;
 use App\Repositories\BookingRepositoryInterface;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class TotalDailyReservationsCounter implements ReservationCounterInterface
 {
@@ -14,12 +14,12 @@ class TotalDailyReservationsCounter implements ReservationCounterInterface
     ) {
     }
 
-    public function countBookings(Carbon $referenceDateTime, array $roomIds = []): int
+    public function countBookings(CarbonImmutable $referenceDateTime, array $roomIds = []): int
     {
         return $this->bookingRepository->sumReservationsOnDate($referenceDateTime, $roomIds);
     }
 
-    public function countBlocks(Carbon $referenceDateTime, array $roomIds = []): int
+    public function countBlocks(CarbonImmutable $referenceDateTime, array $roomIds = []): int
     {
         return $this->blockRepository->sumReservationsOnDate($referenceDateTime, $roomIds);
     }

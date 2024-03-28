@@ -2,10 +2,10 @@
 
 namespace App\Services\ReservationCounter;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 interface ReservationCounterInterface
 {
-    public function countBookings(Carbon $referenceDateTime, array $roomIds = []):int;
-    public function countBlocks(Carbon $referenceDateTime, array $roomIds = []):int;
+    public function countBookings(CarbonImmutable $referenceDateTime, array $roomIds = []):int;
+    public function countBlocks(CarbonImmutable $referenceDateTime, array $roomIds = []):int;
 }

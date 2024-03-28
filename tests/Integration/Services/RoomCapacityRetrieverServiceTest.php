@@ -2,7 +2,8 @@
 
 
 use App\Services\RoomCapacityRetriever;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -44,7 +45,7 @@ class RoomCapacityRetrieverServiceTest extends TestCase
      */
     public function testGetMonthlyCapacity(string $referenceDate, array $roomIds, int $expectedResult): void
     {
-        $result = $this->roomCapacityRetriever->getMonthlyCapacity(Carbon::parse($referenceDate), $roomIds);
+        $result = $this->roomCapacityRetriever->getMonthlyCapacity(CarbonImmutable::parse($referenceDate), $roomIds);
 
         $this->assertEquals($expectedResult, $result);
     }

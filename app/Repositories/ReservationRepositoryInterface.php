@@ -3,18 +3,21 @@
 namespace App\Repositories;
 
 use App\Models\Reservation;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Illuminate\Support\LazyCollection;
 
 interface ReservationRepositoryInterface
 {
-    public function sumReservationsOnDate(Carbon $dateTime, array $roomIds = []): int;
+    public function sumReservationsOnDate(CarbonImmutable $dateTime, array $roomIds = []): int;
 
     /**
-     * @param Carbon $forMonth
+     * @param CarbonImmutable $startsAt
+     * @param CarbonImmutable $endsAt
      * @param array $roomIds
+     * @param array $ignoreBookingsIds
      * @return LazyCollection<Reservation>
      */
-    public function getReservationsInPeriod(Carbon $startsAt,Carbon $endsAt, array $roomIds = [],array $ignoreBookingsIds =[]): LazyCollection;
+    public function getReservationsInPeriod(CarbonImmutable $startsAt,CarbonImmutable $endsAt, array $roomIds = [],array $ignoreBookingsIds =[]): LazyCollection;
 
 }

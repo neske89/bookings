@@ -3,7 +3,8 @@
 namespace Tests\Integration\Repository;
 
 use App\Repositories\BookingRepositoryInterface;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Database\Seeders\ReservationsSeeder;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -35,8 +36,8 @@ class BookingRepositoryTest extends TestCase
         array $ignoredBookingIds,
         int $expectedResult
     ): void {
-        $startsAtCarbon = Carbon::parse($startsAt);
-        $endsAtCarbon = Carbon::parse($endsAt);
+        $startsAtCarbon = CarbonImmutable::parse($startsAt);
+        $endsAtCarbon = CarbonImmutable::parse($endsAt);
         $bookings = $this->bookingRepository->getReservationsInPeriod(
             $startsAtCarbon,
             $endsAtCarbon,
@@ -150,7 +151,7 @@ class BookingRepositoryTest extends TestCase
      */
     public function testSumReservationsOnDate(string $referenceDate, array $roomIds, int $expectedResult): void
     {
-        $result = $this->bookingRepository->sumReservationsOnDate(Carbon::parse($referenceDate), $roomIds);
+        $result = $this->bookingRepository->sumReservationsOnDate(CarbonImmutable::parse($referenceDate), $roomIds);
         $this->assertEquals($expectedResult, $result);
     }
 

@@ -5,7 +5,8 @@ namespace Tests\Unit\OccupancyCalculator;
 use App\Services\OccupancyRateCalculator\DailyOccupancyRateCalculator;
 use App\Services\ReservationCounter\TotalDailyReservationsCounter;
 use App\Services\RoomCapacityRetriever;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use PHPUnit\Framework\TestCase;
 
 class DailyOccupancyRateCalculatorTest extends TestCase
@@ -43,7 +44,7 @@ class DailyOccupancyRateCalculatorTest extends TestCase
             ->method('countBlocks')
             ->willReturn($totalBlocks);
 
-        $result = $this->dailyOccupancyRateCalculator->calculate(new Carbon(), []);
+        $result = $this->dailyOccupancyRateCalculator->calculate(new CarbonImmutable(), []);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -65,7 +66,7 @@ class DailyOccupancyRateCalculatorTest extends TestCase
 
         $this->expectException(\LogicException::class);
 
-        $this->dailyOccupancyRateCalculator->calculate(new Carbon(), []);
+        $this->dailyOccupancyRateCalculator->calculate(new CarbonImmutable(), []);
     }
 
     public static function occupancyDataProvider(): array

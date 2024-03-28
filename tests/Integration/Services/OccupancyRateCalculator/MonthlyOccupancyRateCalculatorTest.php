@@ -3,7 +3,8 @@
 namespace OccupancyRateCalculator;
 
 use App\Services\OccupancyRateCalculator\MonthlyOccupancyRateCalculator;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Database\Seeders\ReservationsSeeder;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,14 +28,14 @@ class MonthlyOccupancyRateCalculatorTest extends TestCase
      */
     public function testCalculate(string $referenceDate, array $roomIds,float $expectedResult): void
     {
-        $result = $this->monthlyOccupancyRateCalculator->calculate(Carbon::parse($referenceDate), $roomIds);
+        $result = $this->monthlyOccupancyRateCalculator->calculate(CarbonImmutable::parse($referenceDate), $roomIds);
         $this->assertEquals($expectedResult, $result);
     }
 
     public function testCalculateThrowsLogicException():void {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('Total capacity cannot be less than total blocks');
-        $this->monthlyOccupancyRateCalculator->calculate(Carbon::parse('2028-02-01 00:00:00'), [RoomSeeder::ROOM_2_CAPACITY_ID]);
+        $this->monthlyOccupancyRateCalculator->calculate(CarbonImmutable::parse('2028-02-01 00:00:00'), [RoomSeeder::ROOM_2_CAPACITY_ID]);
     }
 
     public static function occupancyDataProvider():array

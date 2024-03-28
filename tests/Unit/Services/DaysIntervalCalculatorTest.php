@@ -3,7 +3,8 @@
 namespace Tests\Unit\Services;
 
 use App\Services\DaysIntervalCalculator;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use PHPUnit\Framework\TestCase;
 
 class DaysIntervalCalculatorTest extends TestCase
@@ -14,7 +15,7 @@ class DaysIntervalCalculatorTest extends TestCase
     public function testCalculate(string $start, string $end, int $expectedResult): void
     {
         $service = new DaysIntervalCalculator();
-        $result = $service->calculate(new Carbon($start), new Carbon($end));
+        $result = $service->calculate(new CarbonImmutable($start), new CarbonImmutable($end));
         $this->assertEquals($expectedResult, $result);
     }
 
@@ -22,7 +23,7 @@ class DaysIntervalCalculatorTest extends TestCase
     {
         $service = new DaysIntervalCalculator();
         $this->expectException(\LogicException::class);
-        $service->calculate(new Carbon('2024-04-01 00:00:00'), new Carbon('2024-03-31 23:59:59'));
+        $service->calculate(new CarbonImmutable('2024-04-01 00:00:00'), new CarbonImmutable('2024-03-31 23:59:59'));
     }
 
     public static function dateIntervalProvider(): array

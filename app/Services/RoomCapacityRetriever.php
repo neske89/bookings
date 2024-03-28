@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\RoomRepositoryInterface;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+
 
 class RoomCapacityRetriever
 {
@@ -22,7 +23,7 @@ class RoomCapacityRetriever
     /**
      * @param int[] $roomIds
      */
-    public function getMonthlyCapacity(Carbon $referenceDate, array $roomIds):int {
+    public function getMonthlyCapacity(CarbonImmutable $referenceDate, array $roomIds):int {
         return $this->getDailyCapacity($roomIds) * $referenceDate->daysInMonth;
     }
 

@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
  * @property int room_id
- * @property Carbon starts_at
- * @property Carbon ends_at
+ * @property CarbonImmutable starts_at
+ * @property CarbonImmutable ends_at
  */
 abstract class Reservation extends AbstractModel
 {
@@ -18,14 +20,14 @@ abstract class Reservation extends AbstractModel
 
     protected $casts = [
         'id' => 'integer',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
+        'starts_at' => 'immutable_datetime',
+        'ends_at' => 'immutable_datetime',
         'room_id' => 'integer',
     ];
     protected $fillable = ['room_id', 'starts_at', 'ends_at'];
 
 
-    public function room(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
     }
@@ -42,24 +44,24 @@ abstract class Reservation extends AbstractModel
         return $this;
     }
 
-    public function getStartsAt(): ?Carbon
+    public function getStartsAt(): ?CarbonImmutable
     {
         return $this->starts_at;
     }
 
-    public function setStartsAt(?Carbon $starts_at): self
+    public function setStartsAt(?CarbonImmutable $starts_at): self
     {
         $this->starts_at = $starts_at;
 
         return $this;
     }
 
-    public function getEndsAt(): ?Carbon
+    public function getEndsAt(): ?CarbonImmutable
     {
         return $this->ends_at;
     }
 
-    public function setEndsAt(?Carbon $ends_at): self
+    public function setEndsAt(?CarbonImmutable $ends_at): self
     {
         $this->ends_at = $ends_at;
 

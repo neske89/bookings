@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\LazyCollection;
 
@@ -10,7 +10,7 @@ abstract class ReservationRepository implements ReservationRepositoryInterface
 {
     abstract protected function getQueryBuilder(): Builder;
 
-    public function sumReservationsOnDate(Carbon $dateTime, array $roomIds = []): int
+    public function sumReservationsOnDate(CarbonImmutable $dateTime, array $roomIds = []): int
     {
         $query = $this->getQueryBuilder()
             ->where('starts_at', '<=', $dateTime)
@@ -22,10 +22,10 @@ abstract class ReservationRepository implements ReservationRepositoryInterface
         return $query->count();
     }
 
-    public function getReservationsInPeriod(Carbon $startsAt, Carbon $endsAt, array $roomIds = [],array $ignoreBookingsIds=[]): LazyCollection
+    public function getReservationsInPeriod(CarbonImmutable $startsAt, CarbonImmutable $endsAt, array $roomIds = [],array $ignoreBookingsIds=[]): LazyCollection
     {
-        $startOfPeriod = $startsAt->copy()->startOfDay()->toDateTimeString();
-        $endOfPeriod = $endsAt->copy()->endOfDay()->toDateTimeString();
+        $startOfPeriod = $startsAt->startOfDay()->toDateTimeString();
+        $endOfPeriod = $endsAt->endOfDay()->toDateTimeString();
 
 
         $query = $this->getQueryBuilder();

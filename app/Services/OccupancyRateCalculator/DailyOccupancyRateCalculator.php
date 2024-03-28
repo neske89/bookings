@@ -3,7 +3,7 @@ namespace App\Services\OccupancyRateCalculator;
 
 use App\Services\RoomCapacityRetriever;
 use App\Services\ReservationCounter\TotalDailyReservationsCounter;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class DailyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
 {
@@ -13,12 +13,11 @@ class DailyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
     ) {
     }
 
-    public function calculate(Carbon $referenceDateTime, array $roomIds = []): float
+    public function calculate(CarbonImmutable $referenceDateTime, array $roomIds = []): float
     {
-        $referenceDateTime = $referenceDateTime->copy()->startOfDay();
         $totalCapacity = $this->roomCapacityRetriever->getDailyCapacity($roomIds);
-        $totalBookings = $this->totalDailyReservationsCounter->countBookings($referenceDateTime, $roomIds);
-        $totalBlocks = $this->totalDailyReservationsCounter->countBlocks($referenceDateTime, $roomIds);
+        $totalBookings = $this->totalDailyReservationsCounter->countBookings($referenceDateTime->startOfDay(), $roomIds);
+        $totalBlocks = $this->totalDailyReservationsCounter->countBlocks($referenceDateTime->startOfDay(), $roomIds);
         return $this->calculateOccupancy($totalCapacity, $totalBookings, $totalBlocks);
     }
 }

@@ -4,7 +4,8 @@ namespace App\Services\OccupancyRateCalculator;
 
 use App\Services\ReservationCounter\TotalMonthlyReservationsCounter;
 use App\Services\RoomCapacityRetriever;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 
 class MonthlyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
 {
@@ -15,12 +16,11 @@ class MonthlyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
     )
     {
     }
-    public function calculate(Carbon $referenceDateTime, array $roomIds = []): float
+    public function calculate(CarbonImmutable $referenceDateTime, array $roomIds = []): float
     {
-        $referenceDateTime = $referenceDateTime->copy()->startOfDay();
-        $totalCapacity = $this->roomCapacityRetriever->getMonthlyCapacity($referenceDateTime,$roomIds);
-        $totalBookings = $this->totalMonthlyReservationCounter->countBookings($referenceDateTime, $roomIds);
-        $totalBlocks = $this->totalMonthlyReservationCounter->countBlocks($referenceDateTime, $roomIds);
+        $totalCapacity = $this->roomCapacityRetriever->getMonthlyCapacity($referenceDateTime->startOfDay(),$roomIds);
+        $totalBookings = $this->totalMonthlyReservationCounter->countBookings($referenceDateTime->startOfDay(), $roomIds);
+        $totalBlocks = $this->totalMonthlyReservationCounter->countBlocks($referenceDateTime->startOfDay(), $roomIds);
         return $this->calculateOccupancy($totalCapacity, $totalBookings, $totalBlocks);
     }
 }

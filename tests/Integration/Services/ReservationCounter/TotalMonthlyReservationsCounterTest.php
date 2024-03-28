@@ -3,7 +3,8 @@
 namespace ReservationCounter;
 
 use App\Services\ReservationCounter\TotalMonthlyReservationsCounter;
-use Carbon\Carbon;
+
+use Carbon\CarbonImmutable;
 use Database\Seeders\ReservationsSeeder;
 use Database\Seeders\RoomSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +33,7 @@ class TotalMonthlyReservationsCounterTest extends TestCase
 
     public function testCountBookings(string $forMonthString, array $roomIds, int $expectedBookings): void
     {
-        $forMonth = Carbon::parse($forMonthString);
+        $forMonth = CarbonImmutable::parse($forMonthString);
 
         $result = $this->totalMonthlyReservationsCounter->countBookings($forMonth, $roomIds);
         $this->assertEquals($expectedBookings, $result);
@@ -56,7 +57,7 @@ class TotalMonthlyReservationsCounterTest extends TestCase
      **/
     public function testCountBlocks(string $forMonthString, array $roomIds, int $expectedBookings): void
     {
-        $forMonth = Carbon::parse($forMonthString);
+        $forMonth = CarbonImmutable::parse($forMonthString);
         $result = $this->totalMonthlyReservationsCounter->countBlocks($forMonth, $roomIds);
         $this->assertEquals($expectedBookings, $result);
     }
