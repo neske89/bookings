@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+/**
+ * @property int $id
+ * @property int room_id
+ * @property Carbon starts_at
+ * @property Carbon ends_at
+ */
+class Booking extends Reservation
 {
     use HasFactory;
+    protected $table = 'bookings';
 }

@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Block extends Model
+class Block extends Reservation
 {
-    use HasFactory;
+    protected $table = 'blocks';
 }
