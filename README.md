@@ -9,6 +9,8 @@ Install vendor directory:
     laravelsail/php80-composer:latest \
     composer install --ignore-platform-reqs
 ```
+Copy and setup .env file with Laravel Sail Default Config
+
 Run the container
 `./vendor/bin/sail up`
 
