@@ -15,6 +15,6 @@ interface ReservationRepositoryInterface
      * @param array $roomIds
      * @return LazyCollection<Reservation>
      */
-    public function getReservationsInMonth(Carbon $forMonth, array $roomIds = []): LazyCollection;
+    public function getReservationsInPeriod(Carbon $startsAt,Carbon $endsAt, array $roomIds = [],array $ignoreBookingsIds =[]): LazyCollection;
 
 }

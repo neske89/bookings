@@ -23,10 +23,37 @@ class BlockRepositoryTest extends TestCase
         $this->seed(ReservationsSeeder::class);
     }
 
-    public function testGetReservationsInMonth(string $referenceDate, array $roomIds, int $expectedResult): void
+    /**
+     * @dataProvider getReservationsInPeriodDataProvider
+     */
+    public function testGetReservationsInPeriod(
+        string $startsAt,
+        string $endsAt,
+        array $roomIds,
+        int $expectedResult
+    ): void {
+        $startsAtCarbon = Carbon::parse($startsAt);
+        $endsAtCarbon = Carbon::parse($endsAt);
+        $blocks = $this->blockRepository->getReservationsInPeriod($startsAtCarbon, $endsAtCarbon, $roomIds);
+        $this->assertEquals($expectedResult, $blocks->count());
+    }
+
+    public static function getReservationsInPeriodDataProvider(): array
     {
-        $bookings = $this->blockRepository->getReservationsInMonth(Carbon::parse($referenceDate), $roomIds);
-        $this->assertEquals($expectedResult, $bookings->count());
+        return [
+            'multiple blocks with different periods' => [
+                '2024-01-01 00:00:00',
+                '2026-01-11 23:59:59',
+                [],
+                5,
+            ],
+            'multiple bookings with different periods specific Rooms' => [
+                '2024-01-01 00:00:00',
+                '2026-01-11 23:59:59',
+                [RoomSeeder::ROOM_2_CAPACITY_ID],
+                3,
+            ],
+        ];
     }
 
     /**
