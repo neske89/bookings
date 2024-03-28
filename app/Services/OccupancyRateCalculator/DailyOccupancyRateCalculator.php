@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\OccupancyCalculator;
+namespace App\Services\OccupancyRateCalculator;
 
 use App\Services\RoomCapacityRetriever;
 use App\Services\ReservationCounter\TotalDailyReservationsCounter;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\OccupancyCalculator;
+namespace App\Services\OccupancyRateCalculator;
 
 
 use Carbon\Carbon;

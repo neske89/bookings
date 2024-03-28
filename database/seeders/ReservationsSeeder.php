@@ -41,6 +41,10 @@ class ReservationsSeeder extends Seeder
             ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2024-01-01 00:00:00', 'ends_at' => '2024-01-10 23:59:59'],
             ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2026-01-01 00:00:00', 'ends_at' => '2026-01-10 23:59:59'],
             ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2026-01-01 00:00:00', 'ends_at' => '2026-01-10 23:59:59'],
+            //2027-01-01 00:00:00 3 blocks
+            ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2027-01-01 00:00:00', 'ends_at' => '2027-01-10 23:59:59'],
+            ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2027-01-01 00:00:00', 'ends_at' => '2027-01-10 23:59:59'],
+            ['room_id' => RoomSeeder::ROOM_2_CAPACITY_ID, 'starts_at' => '2027-01-01 00:00:00', 'ends_at' => '2027-01-10 23:59:59'],
 
         ];
     }
