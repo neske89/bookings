@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "1a743f0e-c93d-40aa-ac90-f5528322f934",
+		"name": "BookingLayer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9099170"
+	},
+	"item": [
+		{
+			"name": "Daily Occupancy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/daily-occupancy-rates/:date?room_ids[]=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"daily-occupancy-rates",
+						":date"
+					],
+					"query": [
+						{
+							"key": "room_ids[]",
+							"value": "3"
+						},
+						{
+							"key": "room_ids[]",
+							"value": "4",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "date",
+							"value": "2027-01-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Monthly Occupancy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/monthly-occupancy-rates/:date?room_ids[]=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"monthly-occupancy-rates",
+						":date"
+					],
+					"query": [
+						{
+							"key": "room_ids",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "room_ids[]",
+							"value": "3"
+						}
+					],
+					"variable": [
+						{
+							"key": "date",
+							"value": "2027-10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"room_id\":2,\n    \"starts_at\":\"2024-01-01\",\n    \"ends_at\":\"2024-01-03\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"booking"
+					],
+					"query": [
+						{
+							"key": "room_ids",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "room_ids[]",
+							"value": "3",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Booking",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"room_id\":2,\n    \"starts_at\":\"2024-01-01\",\n    \"ends_at\":\"2024-01-03\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/booking/200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"booking",
+						"200"
+					],
+					"query": [
+						{
+							"key": "room_ids",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "room_ids[]",
+							"value": "3",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
