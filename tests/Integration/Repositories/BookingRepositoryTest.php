@@ -12,7 +12,9 @@ use Tests\TestCase;
 class BookingRepositoryTest extends TestCase
 {
     use RefreshDatabase;
+
     private BookingRepositoryInterface $bookingRepository;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -21,6 +23,12 @@ class BookingRepositoryTest extends TestCase
 
         $this->seed(RoomSeeder::class);
         $this->seed(ReservationsSeeder::class);
+    }
+
+    public function testGetReservationsInMonth(string $referenceDate, array $roomIds, int $expectedResult): void
+    {
+        $bookings = $this->bookingRepository->getReservationsInMonth(Carbon::parse($referenceDate), $roomIds);
+        $this->assertEquals($expectedResult, $bookings->count());
     }
 
     /**
@@ -48,7 +56,6 @@ class BookingRepositoryTest extends TestCase
             '8th August Room C' => ['2024-08-08 00:00:00', [RoomSeeder::ROOM_2_CAPACITY_ID], 0],
         ];
     }
-
 
 
 }

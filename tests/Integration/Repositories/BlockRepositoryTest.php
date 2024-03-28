@@ -23,6 +23,11 @@ class BlockRepositoryTest extends TestCase
         $this->seed(ReservationsSeeder::class);
     }
 
+    public function testGetReservationsInMonth(string $referenceDate, array $roomIds, int $expectedResult): void
+    {
+        $bookings = $this->blockRepository->getReservationsInMonth(Carbon::parse($referenceDate), $roomIds);
+        $this->assertEquals($expectedResult, $bookings->count());
+    }
 
     /**
      * @dataProvider sumReservationsOnDateDataProvider
