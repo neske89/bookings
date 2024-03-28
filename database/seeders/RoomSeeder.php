@@ -7,9 +7,9 @@ use Illuminate\Database\Seeder;
 
 class RoomSeeder extends Seeder
 {
-    public const int ROOM_6_CAPACITY_ID = 3;
-    public const int ROOM_4_CAPACITY_ID = 4;
-    public const int ROOM_2_CAPACITY_ID = 5;
+    public const int ROOM_6_CAPACITY_ID = 1;
+    public const int ROOM_4_CAPACITY_ID = 2;
+    public const int ROOM_2_CAPACITY_ID = 3;
 
 
     /**
