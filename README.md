@@ -7,7 +7,7 @@ Install vendor directory:
     -v $(pwd):/opt \
     -w /opt \
     laravelsail/php80-composer:latest \
-    composer install
+    composer install --ignore-platform-reqs
 ```
 Run the container
 `./vendor/bin/sail up`
