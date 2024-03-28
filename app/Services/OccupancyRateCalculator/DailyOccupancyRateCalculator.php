@@ -15,7 +15,7 @@ class DailyOccupancyRateCalculator extends AbstractOccupancyRateCalculator
 
     public function calculate(Carbon $referenceDateTime, array $roomIds = []): float
     {
-        $referenceDateTime->copy()->startOfDay();
+        $referenceDateTime = $referenceDateTime->copy()->startOfDay();
         $totalCapacity = $this->roomCapacityRetriever->getDailyCapacity($roomIds);
         $totalBookings = $this->totalDailyReservationsCounter->countBookings($referenceDateTime, $roomIds);
         $totalBlocks = $this->totalDailyReservationsCounter->countBlocks($referenceDateTime, $roomIds);
