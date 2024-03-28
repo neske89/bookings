@@ -50,8 +50,12 @@ class MonthlyOccupancyRatesTest extends TestCase
             'room_ids' => $roomIds,
         ]);
         $response = $this->json('GET', self::URI."/{$date}?$queryString");
-        $response->assertStatus(500);
-    }
+        $response->assertStatus(422);
+        $response->assertJsonStructure([
+            'message',
+        ])->assertJson([
+            'message' => 'Total capacity cannot be less than total blocks',
+        ]);    }
 
     public static function monthlyOccupancyRatesDataProvider(): array
     {

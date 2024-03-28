@@ -22,7 +22,8 @@ class BookingCRUDService
     public function create(BookingDTO $bookingDTO): Booking
     {
         $this->roomAvailabilityChecker->check($bookingDTO->roomId, $bookingDTO->startsAt, $bookingDTO->endsAt);
-        return $this->bookingRepository->create($bookingDTO->roomId, $bookingDTO->startsAt, $bookingDTO->endsAt);
+
+        return $this->bookingRepository->create($bookingDTO->roomId, $bookingDTO->startsAt->startOfDay(), $bookingDTO->endsAt->endOfDay());
     }
 
     /**
@@ -37,8 +38,8 @@ class BookingCRUDService
             [$booking->id]
         );
         $booking->setRoomId($bookingDTO->roomId);
-        $booking->setStartsAt($bookingDTO->startsAt);
-        $booking->setEndsAt($bookingDTO->endsAt);
+        $booking->setStartsAt($bookingDTO->startsAt->startOfDay());
+        $booking->setEndsAt($bookingDTO->endsAt->endOfDay());
         return $this->bookingRepository->save($booking);
 
     }
