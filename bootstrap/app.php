@@ -17,10 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (RoomIsAlreadyFullyBookedException $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
+            return response()->json(['message' => $e->getMessage()], 400);
         });
         $exceptions->render(function (LogicException $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+            return response()->json(['message' => $e->getMessage()], 422);
         });
         $exceptions->render(function (Exception $e) {
             return response()->json(['message' => 'Internal Server Error'], 500);
