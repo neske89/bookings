@@ -29,3 +29,8 @@ Execute tests
 
 Generate tests coverage
 `./vendor/bin/sail php artisan test --coverage-html ./coverage`
+
+## Manual Testing
+
+Postman collection is under `./doc/` directory
+=
