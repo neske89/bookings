@@ -17,6 +17,7 @@ Migrate database
 
 Seed database
 `./vendor/bin/sail php artisan db:seed --class=RoomSeeder`
+
 `./vendor/bin/sail php artisan db:seed --class=AssigmentDataSeeder`
 
 ## Testing
