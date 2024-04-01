@@ -33,4 +33,4 @@ Generate tests coverage
 ## Manual Testing
 
 Postman collection is under `./doc/` directory
-=
+
