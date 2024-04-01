@@ -1,5 +1,3 @@
-#Booking Layer test
-
 ## Running
 Install vendor directory:
 ```docker run --rm \
