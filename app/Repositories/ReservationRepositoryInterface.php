@@ -19,5 +19,6 @@ interface ReservationRepositoryInterface
      * @return LazyCollection<Reservation>
      */
     public function getReservationsInPeriod(CarbonImmutable $startsAt,CarbonImmutable $endsAt, array $roomIds = [],array $ignoreBookingsIds =[]): LazyCollection;
+    public function sumReservationsInPeriod(CarbonImmutable $startsAt,CarbonImmutable $endsAt, array $roomIds = [],array $ignoreBookingsIds =[]): int;
 
 }

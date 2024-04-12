@@ -2,8 +2,10 @@
 
 namespace ReservationCounter;
 
+use App\Models\Booking;
 use App\Services\ReservationCounter\TotalMonthlyReservationsCounter;
 
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Database\Seeders\ReservationsSeeder;
 use Database\Seeders\RoomSeeder;
@@ -70,5 +72,30 @@ class TotalMonthlyReservationsCounterTest extends TestCase
             'January Specific Room No Blocks' => ['2024-01-01 00:00:00', [RoomSeeder::ROOM_6_CAPACITY_ID], 0],
 
         ];
+    }
+
+    public function testPerformance() {
+
+        // 10 days
+        $bookingData = ['room_id' => RoomSeeder::ROOM_4_CAPACITY_ID, 'starts_at' => '2024-01-01 00:00:00', 'ends_at' => '2024-01-10 23:59:59'];
+        $start = new Carbon();
+        echo "started inserting\n";
+        $count = 500000;
+        for ($i= 0;$i<$count;$i++) {
+            Booking::create($bookingData);
+        }
+        $end = new Carbon();
+        $diff = $start->diffInSeconds($end);
+        echo "inserted in: $diff \n";
+
+        echo "started\n";
+        $start = new Carbon();
+        $forMonth = CarbonImmutable::parse('2024-01-03 00:00:00');
+        $result = $this->totalMonthlyReservationsCounter->sumBookings($forMonth, []);
+        $end = new Carbon();
+        $diff = $start->diffInSeconds($end);
+        echo "diff:$diff\n";
+        echo "results:$result\n";
+        $this->assertTrue(true);
     }
 }

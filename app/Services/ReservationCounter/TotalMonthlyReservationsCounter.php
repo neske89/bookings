@@ -33,6 +33,15 @@ class TotalMonthlyReservationsCounter implements ReservationCounterInterface
         return $total;
     }
 
+    public function sumBookings(CarbonImmutable $referenceDateTime, array $roomIds = []): int
+    {
+        $startOfMonth = $referenceDateTime->copy()->startOfMonth();
+        $endOfMonth = $referenceDateTime->copy()->endOfMonth();
+        $total = 0;
+        return $this->bookingRepository->sumReservationsInPeriod($startOfMonth, $endOfMonth, $roomIds);
+
+    }
+
     public function countBlocks(CarbonImmutable $referenceDateTime, array $roomIds = []): int
     {
         $startOfMonth = $referenceDateTime->copy()->startOfMonth();
